@@ -2,6 +2,7 @@ import React from "react";
 import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import SwapiCard from "../component/card";
+import Buttons from "../component/buttons";
 
 export const Home = () => (
 	<div className="text-center mt-5">
@@ -10,9 +11,7 @@ export const Home = () => (
 		<div>
 			<SwapiCard />
 		</div>
-		<a href="#" className="btn btn-success mt-5">
-			Pagina siguiente
-		</a>
+		 	<Buttons/>
 		</div>
 	</div>
 );

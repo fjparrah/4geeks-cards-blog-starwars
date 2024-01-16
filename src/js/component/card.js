@@ -1,28 +1,18 @@
 import React, { useState, useEffect } from "react";
+import { useContext } from "react";
+import { Context } from "../store/appContext";
 
 const SwapiCard = () => {
+  const { store, actions } = useContext(Context);
+
   const [characters, setCharacters] = useState([]);
 
   useEffect(() => {
-    const fetchCharacters = async () => {
-      try {
-        const response = await fetch("https://swapi.dev/api/people/");
-
-        if (!response.ok) {
-          throw new Error(
-            `Error en la solicitud: ${response.status} ${response.statusText}`
-          );
-        }
-
-        const data = await response.json();
-        const charactersData = data.results;
-        setCharacters(charactersData);
-      } catch (error) {
-        console.error("Error al obtener personajes:", error);
-      }
+    const fetchData = async () => {
+      await actions.fetchCharacters(setCharacters);
     };
 
-    fetchCharacters();
+    fetchData();
   }, []);
 
   const getCharacterImage = (id) => {
@@ -50,11 +40,15 @@ const SwapiCard = () => {
                 <h5 className="my-3 card-title">Nombre: {character.name}</h5>
                 <p className="card-text">Altura: {character.height}</p>
                 <p className="card-text">Género: {character.gender}</p>
-              </div>
-              <div>
-                <a href="/character" className="btn btn-success mt-5">
-                  Detalles
-                </a>
+
+                <div>
+                  <a href="/character" className="btn btn-success mt-5 me-3">
+                    Detalles
+                  </a>
+                  <a href="" className="btn btn-success mt-5 ms-3">
+                    Favorito
+                  </a>
+                </div>
               </div>
             </div>
           </div>

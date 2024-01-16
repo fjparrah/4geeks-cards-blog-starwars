@@ -1,21 +1,49 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
+			initialUrl: [
 				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
+					films: "https://swapi.dev/api/films/",
+					people: "https://swapi.dev/api/people/",
+					planets: "https://swapi.dev/api/planets/",
+					species: "https://swapi.dev/api/species/",
+					starships: "https://swapi.dev/api/starships/",
+					vehicles: "https://swapi.dev/api/vehicles/"
+				}
+			],
+			favoritos: [
+				{
+					people: "https://swapi.dev/api/people/1/"
 				},
 				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
+					people: "https://swapi.dev/api/people/2/"
 				}
 			]
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
+			fetchCharacters: async (setCharacters) => {
+				try {
+				  // Lógica para obtener los personajes
+				  const response = await fetch("https://swapi.dev/api/people/");
+			  
+				  if (!response.ok) {
+					throw new Error(
+					  `Error en la solicitud: ${response.status} ${response.statusText}`
+					);
+				  }
+			  
+				  const data = await response.json();
+				  const charactersData = data.results;
+				  setCharacters(charactersData);
+				} catch (error) {
+				  console.error("Error al obtener personajes:", error);
+				}
+			  			
+			},
+
+
+
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
