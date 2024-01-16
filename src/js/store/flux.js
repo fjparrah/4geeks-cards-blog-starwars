@@ -21,9 +21,11 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
     },
     actions: {
-      fetchCharacters: async (setCharacters) => {
+      fetchCharacters: async (setCharacters, page) => {
         try {
-          const response = await fetch("https://swapi.dev/api/people/");
+          const response = await fetch(
+            `https://swapi.dev/api/people/?page=${page}`
+          );
 
           if (!response.ok) {
             throw new Error(
@@ -39,30 +41,16 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      addToFavorites: (characterId) => {
-        const { stores, setStores } = getStore();
+      addToFavorites: (characterId) => {},
 
-        const exists = setStores.personajesFavoritos.find(
-          (char) => char.char === `https://swapi.dev/api/people/${characterId}/`
-        );
-
-        if (!exists) {
-          const updatedFavoritos = [
-            ...store.personajesFavoritos,
-            { char: `https://swapi.dev/api/people/${characterId}/` },
-          ];
-          setStores({ personajesFavoritos: updatedFavoritos });
-          console.log(`Personaje ID ${characterId} agregado a favoritos.`);
-        } else {
-          console.log(`Personaje ID ${characterId} ya está en favoritos.`);
-        }
-      },
+      removeFromFavorites: (characterId) => {},
 
       loadSomeData: () => {
         /**
 					fetch().then().then(data => setStore({ "foo": data.bar }))
 				*/
       },
+
       changeColor: (index, color) => {
         //get the store
         const store = getStore();

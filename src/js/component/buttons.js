@@ -12,7 +12,7 @@ const Buttons = ({ setPage, currentPage }) => {
   return (
     <div className="row">
       <div className="mt-3 d-flex flex-column flex-sm-row justify-content-center text-center">
-        <button
+        {/* <button
           type="button"
           className="btn btn-primary mx-2"
           onClick={handlePrevPage}
@@ -27,7 +27,7 @@ const Buttons = ({ setPage, currentPage }) => {
           onClick={handleNextPage}
         >
           Página Siguiente
-        </button>
+        </button> */}
       </div>
     </div>
   );

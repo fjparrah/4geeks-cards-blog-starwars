@@ -24,14 +24,11 @@ const SwapiCardCharacter = () => {
     return `https://starwars-visualguide.com/assets/img/characters/${characterId}.jpg`;
   };
 
- 
-  const selectedCharacter = characters.find((character) => character.id === parseInt(id));
+  const selectedCharacter = characters.find(
+    (character) => character.id === parseInt(id)
+  );
 
-  if (!selectedCharacter) {
-    return <div>No se encontró el personaje con ID {id}</div>;
-  }
-
-  return (
+ return (
     <div className="container">
       <div className="row justify-content-center">
         <div className="col-md-4">
@@ -42,7 +39,9 @@ const SwapiCardCharacter = () => {
               alt={`Character ${selectedCharacter.id}`}
             />
             <div className="card-body mb-3">
-              <h5 className="my-3 card-title">Nombre: {selectedCharacter.name}</h5>
+              <h5 className="my-3 card-title">
+                Nombre: {selectedCharacter.name}
+              </h5>
               <p className="card-text">Altura: {selectedCharacter.height}</p>
               <p className="card-text">Género: {selectedCharacter.gender}</p>
             </div>
