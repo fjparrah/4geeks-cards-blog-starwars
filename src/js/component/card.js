@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 
 const SwapiCard = () => {
   const { store, actions } = useContext(Context);
@@ -25,6 +26,10 @@ const SwapiCard = () => {
     return `https://starwars-visualguide.com/assets/img/characters/${characterId}.jpg`;
   };
 
+  const handleAddToFavorites = (characterId) => {
+    actions.addToFavorites(characterId);
+  };
+
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -42,12 +47,18 @@ const SwapiCard = () => {
                 <p className="card-text">Género: {character.gender}</p>
 
                 <div>
-                  <a href="/character" className="btn btn-success mt-5 me-3">
+                  <Link
+                    to={`/character/${character.id}`}
+                    className="btn btn-success mt-5 me-3"
+                  >
                     Detalles
-                  </a>
-                  <a href="" className="btn btn-success mt-5 ms-3">
+                  </Link>
+                  <button
+                    className="btn btn-success mt-5 ms-3"
+                    onClick={() => handleAddToFavorites(character.id)}
+                  >
                     Favorito
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
@@ -59,3 +70,4 @@ const SwapiCard = () => {
 };
 
 export default SwapiCard;
+
