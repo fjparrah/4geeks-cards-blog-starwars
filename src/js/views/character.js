@@ -1,7 +1,5 @@
 import React from "react";
-import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
-import SwapiCard from "../component/card";
 import SwapiCardCharacter from "../component/character";
 
 export const Character = () => (

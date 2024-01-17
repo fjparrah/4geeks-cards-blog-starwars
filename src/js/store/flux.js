@@ -18,10 +18,13 @@ const getState = ({ getStore, getActions, setStore }) => {
         {
           char: "https://swapi.dev/api/people/2/",
         },
+        {
+          char: "https://swapi.dev/api/people/3/",
+        },
       ],
     },
     actions: {
-      fetchCharacters: async (setCharacters, page) => {
+      fetchCharacters: async (characters, page) => {
         try {
           const response = await fetch(
             `https://swapi.dev/api/people/?page=${page}`
@@ -35,11 +38,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           const data = await response.json();
           const charactersData = data.results;
-          setCharacters(charactersData);
+          characters(charactersData);
+          setPage(charactersData);
         } catch (error) {
           console.error("Error al obtener personajes:", error);
         }
       },
+      
 
       addToFavorites: (characterId) => {},
 

@@ -30,7 +30,7 @@ const SwapiCard = () => {
   const handleAddToFavorites = (characterId) => {
     actions.addToFavorites(characterId);
   };
-
+  
   return (
     <>
       <div className="container">
@@ -45,13 +45,14 @@ const SwapiCard = () => {
                 />
                 <div className="card-body mb-3">
                   <h5 className="my-3 card-title">Nombre: {character.name}</h5>
+                  <p className="card-text">ID: {index}</p>
                   <p className="card-text">Altura: {character.height}</p>
                   <p className="card-text">Género: {character.gender}</p>
 
                   <div>
-                    {/* Utiliza el componente Link para enviar el ID en la URL */}
+                    {}
                     <Link
-                      to={`/character/${character.id}`}
+                      to={`/character/${index}`}
                       className="btn btn-success mt-5 me-3"
                     >
                       Detalles

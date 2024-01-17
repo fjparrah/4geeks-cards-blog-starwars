@@ -16,7 +16,7 @@ export const Demo = () => {
               key={index}
               className="list-group-item d-flex justify-content-between align-items-center"
             >
-              {/* Agrega el contenido del personaje aquí */}
+              {}
               <div>
                 <span>Personaje: {item.char}</span>
               </div>
