@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const SwapiCardCharacter = () => {
-  const { params } = useParams();
+  const index = useParams();
   const [character, setCharacter] = useState(null);
-  const char = 58;
+  const char = parseInt(index.id);
 
   useEffect(() => {
     const fetchCharacter = async () => {
@@ -45,7 +45,7 @@ const SwapiCardCharacter = () => {
                 <h5 className="my-3 card-title">Nombre: {character.name}</h5>
                 <p className="card-text">Altura: {character.height}</p>
                 <p className="card-text">Género: {character.gender}</p>
-                <p className="card-text">ID: {index}</p>
+                <p className="card-text">ID: {index.id}</p>
                 <div>
                   <a href="/character" className="btn btn-success mt-5">
                     Favorito

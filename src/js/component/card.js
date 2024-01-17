@@ -30,7 +30,7 @@ const SwapiCard = () => {
   const handleAddToFavorites = (characterId) => {
     actions.addToFavorites(characterId);
   };
-  
+
   return (
     <>
       <div className="container">
@@ -52,7 +52,7 @@ const SwapiCard = () => {
                   <div>
                     {}
                     <Link
-                      to={`/character/${index}`}
+                      to={`/character/${parseInt(index) + 1}`}
                       className="btn btn-success mt-5 me-3"
                     >
                       Detalles
