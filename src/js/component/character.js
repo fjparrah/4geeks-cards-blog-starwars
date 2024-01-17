@@ -24,7 +24,7 @@ const SwapiCardCharacter = () => {
     let characterId = x;
 
     if (x > 16) {
-      characterId = x + 1;
+      characterId = x ;
     }
 
     return `https://starwars-visualguide.com/assets/img/characters/${characterId}.jpg`;
