@@ -48,16 +48,26 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       addToFavorites: (characterId) => {
-        const [favArray, setFavArray] = useState([]);
+        const store = getStore(); 
+        const newFav = `https://swapi.dev/api/people/${characterId}/`;
 
-        const addToFav = (characterId) => {
         
-          const newFav = `https://swapi.dev/api/people/${characterId}/`;
-          setFavArray((personajesFavoritos) => [
-            ...personajesFavoritos,
-            newFav,
-          ]);
-        };
+        const exists = store.personajesFavoritos.find(
+          (fav) => fav.char === newFav
+        );
+
+        if (!exists) {
+        
+          setStore({
+            personajesFavoritos: [
+              ...store.personajesFavoritos,
+              { char: newFav },
+            ],
+          });
+          console.log(`Personaje con ID ${characterId} agregado a favoritos.`);
+        } else {
+          console.log(`Personaje con ID ${characterId} ya está en favoritos.`);
+        }
       },
 
       removeFromFavorites: (characterId) => {},
