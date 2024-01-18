@@ -64,9 +64,9 @@ const getState = ({ getStore, getActions, setStore }) => {
               { char: newFav },
             ],
           });
-          console.log(`Personaje con ID ${characterId} agregado a favoritos.`);
+          console.log(`Personaje con ID ${newFav} agregado a favoritos.`);
         } else {
-          console.log(`Personaje con ID ${characterId} ya está en favoritos.`);
+          console.log(`Personaje con ID ${newFav} ya está en favoritos.`);
         }
       },
 

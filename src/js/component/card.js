@@ -45,7 +45,7 @@ const SwapiCard = () => {
                 />
                 <div className="card-body mb-3">
                   <h5 className="my-3 card-title">Nombre: {character.name}</h5>
-                  <p className="card-text">ID: {index}</p>
+                  <p className="card-text">ID: {index + 1 }</p>
                   <p className="card-text">Altura: {character.height}</p>
                   <p className="card-text">Género: {character.gender}</p>
 

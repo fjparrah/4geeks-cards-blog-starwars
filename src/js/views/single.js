@@ -7,6 +7,23 @@ export const Single = props => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
 	return (
+            //   <li
+            //   key={index}
+            //   className="list-group-item d-flex justify-content-between align-items-center"
+            // >
+            //   {}
+            //   <div>
+            //     <span>Personaje: {item.char}</span>
+            //   </div>
+            //   <button
+            //     className="btn btn-danger"
+            //     onClick={() => actions.removeFromFavorites(index)}
+            //   >
+            //     Eliminar
+            //   </button>
+            // </li>
+
+
 		<div className="jumbotron">
 			<h1 className="display-4">This will show the demo element: {store.demo[params.theid].title}</h1>
 
