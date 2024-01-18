@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -44,9 +46,19 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("Error al obtener personajes:", error);
         }
       },
-      
 
-      addToFavorites: (characterId) => {},
+      addToFavorites: (characterId) => {
+        const [favArray, setFavArray] = useState([]);
+
+        const addToFav = (characterId) => {
+        
+          const newFav = `https://swapi.dev/api/people/${characterId}/`;
+          setFavArray((personajesFavoritos) => [
+            ...personajesFavoritos,
+            newFav,
+          ]);
+        };
+      },
 
       removeFromFavorites: (characterId) => {},
 

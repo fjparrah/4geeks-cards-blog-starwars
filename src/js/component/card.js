@@ -27,8 +27,8 @@ const SwapiCard = () => {
     return `https://starwars-visualguide.com/assets/img/characters/${characterId}.jpg`;
   };
 
-  const handleAddToFavorites = (characterId) => {
-    actions.addToFavorites(characterId);
+  const handleAddToFavorites = (charfavorite) => {
+    actions.addToFavorites(charfavorite);
   };
 
   return (
@@ -59,7 +59,7 @@ const SwapiCard = () => {
                     </Link>
                     <button
                       className="btn btn-success mt-5 ms-3"
-                      onClick={() => handleAddToFavorites(character.id)}
+                      onClick={() => handleAddToFavorites(index)}
                     >
                       Favorito
                     </button>
