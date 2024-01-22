@@ -18,8 +18,8 @@ const SwapiCard = () => {
     fetchData();
   }, [page]);
 
-  const handleAddToFavorites = (charfavorite) => {
-    actions.addToFavorites(charfavorite);
+  const handleAddToFavorites = (characterId) => {
+    actions.addToFavorites(characterId);
   };
 
   const handlePageChange = (newPage) => {
@@ -43,17 +43,17 @@ const SwapiCard = () => {
 
                   <div>
                     <Link
-                      to={`/character/${index + 1}`}
+                      to={`/character/${character.index + 1}`}
                       className="btn btn-success mt-5 me-3"
                     >
                       Detalles
                     </Link>
                     <button
-                      className="btn btn-success mt-5 ms-3"
-                      onClick={() => handleAddToFavorites(character)}
-                    >
-                      Favorito
-                    </button>
+                    className="btn btn-success mt-5 ms-3"
+                    onClick={() => handleAddToFavorites(character.index)}
+                  >
+                    Favorito
+                  </button>
                   </div>
                 </div>
               </div>
