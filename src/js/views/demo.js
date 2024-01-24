@@ -9,11 +9,11 @@ export const Demo = () => {
   useEffect(() => {
     // Actualiza la lista de favoritos cuando hay cambios en store.personajesFavoritos
     setFavoritos(store.personajesFavoritos);
-  }, []);
+  }, [store.personajesFavoritos]);
 
-  const handleRemoveFromFavorites = (character) => {
-    actions.removeFromFavorites(character.char);
-    // No ejecutes setFavoritos aquí, ya que el cambio debería reflejarse a través del efecto useEffect
+  const handleRemoveFromFavorites = (index) => {
+    // Cambiado de character.index a index
+    actions.removeFromFavorites(index);
   };
 
   return (
@@ -23,7 +23,7 @@ export const Demo = () => {
         <p>No hay personajes favoritos.</p>
       ) : (
         <ul className="list-group">
-          {favoritos.map((character, index) => (
+          {favoritos.map((character, index) => ( // Cambiado de store.personajesFavoritos a favoritos
             <li key={index} className="list-group-item">
               <div className="row align-items-center">
                 <div className="col-md-8">
@@ -39,7 +39,7 @@ export const Demo = () => {
                     </Link>
                     <button
                       className="btn btn-danger"
-                      onClick={() => handleRemoveFromFavorites(character)}
+                      onClick={() => handleRemoveFromFavorites(character.index)}
                     >
                       Eliminar
                     </button>

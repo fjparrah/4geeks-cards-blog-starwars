@@ -4,7 +4,7 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 
 const SwapiCard = () => {
-  const { store, actions } = useContext(Context);
+  const { actions } = useContext(Context);
 
   const [characters, setCharacters] = useState([]);
   const [page, setPage] = useState(1);
@@ -17,7 +17,7 @@ const SwapiCard = () => {
 
     fetchData();
   }, [page]);
-
+  
   const handleAddToFavorites = (characterId) => {
     actions.addToFavorites(characterId);
   };
@@ -50,7 +50,7 @@ const SwapiCard = () => {
                     </Link>
                     <button
                     className="btn btn-success mt-5 ms-3"
-                    onClick={() => handleAddToFavorites(character.index)}
+                    onClick={() => handleAddToFavorites(character)}
                   >
                     Favorito
                   </button>

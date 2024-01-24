@@ -3,26 +3,15 @@ import { useState } from "react";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      initialUrl: [
-        {
-          films: "https://swapi.dev/api/films/",
-          people: "https://swapi.dev/api/people/",
-          planets: "https://swapi.dev/api/planets/",
-          species: "https://swapi.dev/api/species/",
-          starships: "https://swapi.dev/api/starships/",
-          vehicles: "https://swapi.dev/api/vehicles/",
-        },
-      ],
-      personajesFavoritos: [
-        // Lista vacía inicialmente
-      ],
+      personajesFavoritos: [], // Initialize personajesFavoritos in the store
     },
+
     actions: {
       fetchCharacters: async (setCharacters, setTotalPages, page) => {
         try {
           const response = await fetch(`https://swapi.dev/api/people/?page=${page}`);
           if (!response.ok) {
-            throw new Error('Error fetching data from API');
+            throw new Error('Error');
           }
 
           const data = await response.json();
@@ -52,71 +41,43 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         } catch (error) {
           console.error('Error fetching data:', error);
-          // Mostrar mensaje de error al usuario si es necesario...
         }
       },
 
-      addToFavorites: (characterId) => {
+      addToFavorites: (char1) => {
         try {
-          const store = getStore();
-      
-          // Check if the character is already in favorites
-          const exists = store.personajesFavoritos.find((fav) => fav.index === characterId);
-      
-          if (!exists) {
-            // Find the character in the list of fetched characters
-            const characterToAdd = store.personajes.find((character) => character.index === characterId);
-      
-            if (characterToAdd) {
-              // If the character is found, add it to favorites
-              const updatedFavorites = [...store.personajesFavoritos, characterToAdd];
-      
-              if (setStore) {
-                setStore((prevState) => ({
-                  ...prevState,
-                  personajesFavoritos: updatedFavorites,
-                }));
-              }
-      
-              console.log(`Personaje con ID ${characterId} agregado a favoritos.`);
-            } else {
-              console.log(`Personaje con ID ${characterId} no encontrado en el listado completo.`);
-            }
-          } else {
-            console.log(`Personaje con ID ${characterId} ya está en favoritos.`);
+          if (setStore) {
+            setStore((prevState) => {
+              const updatedFavorites = [...prevState.personajesFavoritos, char1];
+              return { ...prevState, personajesFavoritos: updatedFavorites };
+            });
+            console.log(`Personaje con ID ${char1.index} agregado a favoritos.`);
           }
         } catch (error) {
           console.error('Error al agregar a favoritos:', error);
-          // Handle error as needed...
         }
       },
       
-      
-      removeFromFavorites: (characterId) => {
+      removeFromFavorites: (char2) => {
         try {
-          const store = getStore();
-          
-          const updatedFavorites = store.personajesFavoritos.filter((fav) => fav.char !== characterId);
-          
           if (setStore) {
-            setStore((prevState) => ({
-              ...prevState,
-              personajesFavoritos: updatedFavorites,
-            }));
+            setStore((prevState) => {
+              const updatedFavorites = prevState.personajesFavoritos.filter((fav) => fav.index !== char2.index);
+              return { ...prevState, personajesFavoritos: updatedFavorites };
+            });
+            console.log(`Personaje con ID ${char2.index} eliminado de favoritos.`);
           }
-          
-          console.log(`Personaje con ID ${characterId} eliminado de favoritos.`);
         } catch (error) {
           console.error('Error al eliminar de favoritos:', error);
-          // Mostrar mensaje de error al usuario si es necesario...
         }
       },
+      
       
 
       loadSomeData: () => {
         /**
-          fetch().then().then(data => setStore({ "foo": data.bar }))
-        */
+         * Example: fetch().then().then(data => setStore({ "foo": data.bar }))
+         */
       },
 
       changeColor: (index, color) => {
