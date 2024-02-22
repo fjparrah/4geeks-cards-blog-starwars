@@ -3,7 +3,7 @@ import { useState } from "react";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      personajesFavoritos: [], // Initialize personajesFavoritos in the store
+      personajesFavoritos: []
     },
 
     actions: {
@@ -44,32 +44,24 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      addToFavorites: (char1) => {
-        try {
-          if (setStore) {
-            setStore((prevState) => {
-              const updatedFavorites = [...prevState.personajesFavoritos, char1];
-              return { ...prevState, personajesFavoritos: updatedFavorites };
-            });
-            console.log(`Personaje con ID ${char1.index} agregado a favoritos.`);
-          }
-        } catch (error) {
-          console.error('Error al agregar a favoritos:', error);
-        }
-      },
+     
+       addToFavorites: (data) => {
+         const {personajesFavoritos} = getStore()
+			 	
+			 	if( data ){
+			 	setStore({personajesFavoritos: [...personajesFavoritos, data.character]})
+			 	} else {
+			 		console.log("already in favorites")
+			 	}
+       },
       
-      removeFromFavorites: (char2) => {
-        try {
-          if (setStore) {
-            setStore((prevState) => {
-              const updatedFavorites = prevState.personajesFavoritos.filter((fav) => fav.index !== char2.index);
-              return { ...prevState, personajesFavoritos: updatedFavorites };
-            });
-            console.log(`Personaje con ID ${char2.index} eliminado de favoritos.`);
-          }
-        } catch (error) {
-          console.error('Error al eliminar de favoritos:', error);
-        }
+      removeFromFavorites: (remove) => {
+        
+        const {personajesFavoritos}  = getStore();
+				
+				const updatedFavorites = personajesFavoritos.filter((personaje) => personaje.index !== remove.index );
+			  
+				setStore({ personajesFavoritos : updatedFavorites });
       },
       
       

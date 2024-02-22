@@ -10,7 +10,7 @@ export const Demo = () => {
     // Actualiza la lista de favoritos cuando hay cambios en store.personajesFavoritos
     setFavoritos(store.personajesFavoritos);
   }, [store.personajesFavoritos]);
-
+         
   const handleRemoveFromFavorites = (index) => {
     // Cambiado de character.index a index
     actions.removeFromFavorites(index);
@@ -39,7 +39,7 @@ export const Demo = () => {
                     </Link>
                     <button
                       className="btn btn-danger"
-                      onClick={() => handleRemoveFromFavorites(character.index)}
+                      onClick={() => handleRemoveFromFavorites(character)}
                     >
                       Eliminar
                     </button>
