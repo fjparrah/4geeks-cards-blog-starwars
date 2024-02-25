@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+
+
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -60,14 +62,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           const startIndex = (page - 1) * data.results.length;
           const planetsData = data.results.map((planet, index) => {
             let planetID = startIndex + index + 1;
-            console.log(planet)
+            console.log(data.id)
       
-            return {
+            return { 
               
-              name: planet.name,
+              name: planet.name, 
               population: planet.population,
-              // gender: character.gender,
-              id: startIndex + index + 1, // Assuming 'id' is the unique identifier for planets
+              
+              id: startIndex + index + 1, 
               image: `https://starwars-visualguide.com/assets/img/planets/${planetID + 1}.jpg`,
             };
           });
@@ -83,27 +85,69 @@ const getState = ({ getStore, getActions, setStore }) => {
       
 
      
-       addToFavorites: (data) => {
-         const {personajesFavoritos} = getStore()
-			 	console.log(data)
-			 	if( data ){
-			 	setStore({personajesFavoritos: [...personajesFavoritos, data.character]})
-			 	} else {
-			 		console.log("already in favorites")
-			 	}
-       },
-
-       addToFavoritesPlanet: (data) => {
-        
-        const {planetasFavoritos} = getStore()
+      addToFavorites: (data) => {
+        const { personajesFavoritos } = getStore();
+        console.log(data);
+       
+        if (data && data.character) {
+          
+          const characterExists = personajesFavoritos.some(
+            (favCharacter) => favCharacter.index === data.character.index
+          );
       
-        if( data ){
-        setStore({planetasFavoritos: [...planetasFavoritos, data]})
-        console.log(planetasFavoritos)
+          if (!characterExists) {
+            setStore({ personajesFavoritos: [...personajesFavoritos, data.character] });
+            window.alert("El personaje se agrego a favoritos");
+          } else {
+            window.alert("El personaje ya está en favoritos");
+          }
         } else {
-          console.log("already in favorites")
+          console.error("Datos inválidos para agregar a favoritos");
         }
       },
+      
+      addToFavoritesPlanet: (data) => {
+        const { planetasFavoritos } = getStore();
+        console.log(data.planet);
+      
+       
+
+        if (data ) {
+          const planetaExiste = planetasFavoritos.some(
+            (favPlanet) => favPlanet.id === data.id
+          );
+      
+          if (!planetaExiste) {
+            setStore({planetasFavoritos: [...planetasFavoritos, data]});
+            window.alert("El planeta se agrego a favoritos");
+          } else {
+            window.alert("El planeta ya se encuentra en favoritos");
+          }
+        } else {
+          console.error("Datos inválidos para agregar a favoritos");
+        }
+      },
+      
+
+      // addToFavoritesPlanet: (data) => {
+      //   const { planetasFavoritos } = getStore();
+      
+      //   if (data) {
+        
+      //     const indexExists = planetasFavoritos.some(
+      //       (favPlanet) => favPlanet.id === data.id
+      //     );
+      
+      //     if (!indexExists) {
+      //       setStore({ planetasFavoritos: [...planetasFavoritos, data] });
+      //       console.log(planetasFavoritos);
+      //     } else {
+      //       console.log("El planeta ya está en favoritos");
+      //     }
+      //   } else {
+      //     console.error("Datos inválidos para agregar a favoritos");
+      //   }
+      // },
       
       removeFromFavorites: (remove) => {
         
@@ -114,25 +158,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ personajesFavoritos : updatedFavorites });
       },
       
-      
-
-      loadSomeData: () => {
-        /**
-         * Example: fetch().then().then(data => setStore({ "foo": data.bar }))
-         */
+      removePlanteFromFavorites: (remove) => {
+        
+        const {planetasFavoritos}  = getStore();
+				
+				const updatedFavorites = planetasFavoritos.filter((planeta) => planeta.id !== remove.id );
+			  
+				setStore({ planetasFavoritos : updatedFavorites });
       },
 
-      changeColor: (index, color) => {
-        const store = getStore();
-        const demo = store.demo.map((elm, i) => {
-          if (i === index) elm.background = color;
-          return elm;
-        });
+      // loadSomeData: () => {
+      //   /**
+      //    * Example: fetch().then().then(data => setStore({ "foo": data.bar }))
+      //    */
+      // },
 
-        if (setStore) {
-          setStore({ demo: demo });
-        }
-      },
+      // changeColor: (index, color) => {
+      //   const store = getStore();
+      //   const demo = store.demo.map((elm, i) => {
+      //     if (i === index) elm.background = color;
+      //     return elm;
+      //   });
+
+      //   if (setStore) {
+      //     setStore({ demo: demo });
+      //   }
+      // },
     },
   };
 };

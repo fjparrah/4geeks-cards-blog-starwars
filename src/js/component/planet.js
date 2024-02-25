@@ -1,33 +1,42 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Context } from "../store/appContext";
+import { useContext } from "react";
 
 const SwapiCardPlanet = () => {
-  const index = useParams();
-  const [planets, setPlanets] = useState(null);
-  const planet = parseInt(index.id);
+  const { id } = useParams();
+  const [planet, setPlanet] = useState(null);
+  const planetId = parseInt(id);
+  const { actions } = useContext(Context);
 
   useEffect(() => {
     const fetchPlanet = async () => {
       try {
-        const response = await fetch(`https://swapi.dev/api/planets/${planet}`);
+        const response = await fetch(`https://swapi.dev/api/planets/${planetId}`);
         const data = await response.json();
-        setPlanets(data);
+        
+        // Ensure the data object has an 'id' property
+        const planetData = {
+          ...data,
+          id: planetId,
+        };
+
+        setPlanet(planetData);
       } catch (error) {
-        console.error("Error fetching character:", error);
+        console.error("Error fetching planet:", error);
       }
     };
 
     fetchPlanet();
-  }, []);
+  }, [planetId]);
 
-  const getCharacterImage = (x) => {
-    let characterId = x;
+  const getPlanetImage = (x) => {
+    let planetId = x;
+    return `https://starwars-visualguide.com/assets/img/planets/${planetId + 1}.jpg`;
+  };
 
-    if (x > 16) {
-      characterId = x ;
-    }
-
-    return `https://starwars-visualguide.com/assets/img/characters/${characterId}.jpg`;
+  const handleAddToFavorites = () => {
+    actions.addToFavoritesPlanet(planet);
   };
 
   return (
@@ -37,19 +46,21 @@ const SwapiCardPlanet = () => {
           {planet && (
             <div className="card mb-3">
               <img
-                src={getCharacterImage(char)}
+                src={getPlanetImage(planetId)}
                 className="card-img-top"
-                alt={`Character ${planet.id}`}
+                alt={`Planet ${planetId}`}
               />
               <div className="card-body mb-3">
                 <h5 className="my-3 card-title">Nombre: {planet.name}</h5>
-                {/* <p className="card-text">Altura: {planet.height}</p>
-                <p className="card-text">Género: {planet.gender}</p> */}
-                <p className="card-text">ID: {planet.id}</p>
+                <p className="card-text">Poblacion: {planet.population}</p>
+                <p className="card-text">ID: {planetId}</p>
                 <div>
-                  <a href="/character" className="btn btn-success mt-5">
+                  <button
+                    className="btn btn-success mt-5 ms-3"
+                    onClick={handleAddToFavorites}
+                  >
                     Favorito
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
@@ -61,3 +72,4 @@ const SwapiCardPlanet = () => {
 };
 
 export default SwapiCardPlanet;
+

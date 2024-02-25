@@ -47,7 +47,7 @@ const SwapiCardPlanets = () => {
 
                   <div>
                     <Link
-                      to={`/character/${planet.id}`}
+                      to={`/planet/${planet.id}`}
                       className="btn btn-success mt-5 me-3"
                     >
                       Detalles
