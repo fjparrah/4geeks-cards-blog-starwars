@@ -1,13 +1,13 @@
 import React from "react";
 import "../../styles/home.css";
-import SwapiCardCharacter from "../component/character";
+import SwapiCard from "../component/card";
 
-export const Character = () => (
+export const Characters = () => (
   <div className="text-center mt-5">
     <div className="container">
-      <h1 className="mb-5">Character Starwars Blog</h1>
+      <h1 className="mb-5">Personajes Starwars Blog</h1>
       <div>
-        <SwapiCardCharacter />
+        <SwapiCard />
       </div>
       <a href="/" className="btn btn-success mt-5">
         Volver

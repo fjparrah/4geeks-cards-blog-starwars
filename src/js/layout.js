@@ -3,13 +3,15 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./views/home";
-import { Demo } from "./views/demo";
-import { Single } from "./views/single";
+import { Demo } from "./views/favoritos";
+import { Characters } from "./views/characters";
+
 import injectContext from "./store/appContext";
 import { Character } from "./views/character";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { Planets } from "./views/planets";
 
 //create your first component
 const Layout = () => {
@@ -24,9 +26,13 @@ const Layout = () => {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/demo" element={<Demo />} />
+            <Route path="/favoritos" element={<Demo />} />
+            <Route path="/planets" element={<Planets />} />
+            <Route path="/characters" element={<Characters />} />
             <Route path="/character/:id" element={<Character />} />
-            <Route path="/single/:theid" element={<Single />} />
+
+
+            {/* <Route path="/single/:theid" element={<Single />} /> */}
             <Route path="*" element={<h1>Not found!</h1>} />
           </Routes>
           <Footer />

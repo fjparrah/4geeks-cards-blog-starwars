@@ -3,7 +3,8 @@ import { useState } from "react";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      personajesFavoritos: []
+      personajesFavoritos: [],
+      planetasFavoritos: []
     },
 
     actions: {
@@ -44,6 +45,42 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      fetchPlanets: async (setPlanets, setTotalPages, page) => {
+        try {
+          const response = await fetch(`https://swapi.dev/api/planets/?page=${page}`);
+          if (!response.ok) {
+            throw new Error('Error');
+          }
+      
+          const data = await response.json();
+          if (!data || !data.results) {
+            throw new Error('Invalid data received from API');
+          }
+          console.log(data)
+          const startIndex = (page - 1) * data.results.length;
+          const planetsData = data.results.map((planet, index) => {
+            let planetID = startIndex + index + 1;
+            
+      
+            return {
+              name: planet.name,
+              // height: character.height,
+              // gender: character.gender,
+              id: startIndex + index + 1, // Assuming 'id' is the unique identifier for planets
+              image: `https://starwars-visualguide.com/assets/img/planets/${planetID}.jpg`,
+            };
+          });
+      
+          if (setPlanets && setTotalPages) {
+            setPlanets(planetsData);
+            setTotalPages(Math.ceil(data.count / data.results.length));
+          }
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      },
+      
+
      
        addToFavorites: (data) => {
          const {personajesFavoritos} = getStore()
@@ -54,6 +91,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 			 		console.log("already in favorites")
 			 	}
        },
+
+       addToFavoritesPlanet: (data) => {
+        console.log(data)
+        const {planetasFavoritos} = getStore()
+      
+        if( data ){
+        setStore({planetasFavoritos: [...planetasFavoritos, data]})
+        console.log(planetasFavoritos)
+        } else {
+          console.log("already in favorites")
+        }
+      },
       
       removeFromFavorites: (remove) => {
         
