@@ -60,14 +60,15 @@ const getState = ({ getStore, getActions, setStore }) => {
           const startIndex = (page - 1) * data.results.length;
           const planetsData = data.results.map((planet, index) => {
             let planetID = startIndex + index + 1;
-            
+            console.log(planet)
       
             return {
+              
               name: planet.name,
-              // height: character.height,
+              population: planet.population,
               // gender: character.gender,
               id: startIndex + index + 1, // Assuming 'id' is the unique identifier for planets
-              image: `https://starwars-visualguide.com/assets/img/planets/${planetID}.jpg`,
+              image: `https://starwars-visualguide.com/assets/img/planets/${planetID + 1}.jpg`,
             };
           });
       
@@ -84,7 +85,7 @@ const getState = ({ getStore, getActions, setStore }) => {
      
        addToFavorites: (data) => {
          const {personajesFavoritos} = getStore()
-			 	
+			 	console.log(data)
 			 	if( data ){
 			 	setStore({personajesFavoritos: [...personajesFavoritos, data.character]})
 			 	} else {
@@ -93,7 +94,7 @@ const getState = ({ getStore, getActions, setStore }) => {
        },
 
        addToFavoritesPlanet: (data) => {
-        console.log(data)
+        
         const {planetasFavoritos} = getStore()
       
         if( data ){

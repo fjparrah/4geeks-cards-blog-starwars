@@ -19,7 +19,7 @@ const SwapiCard = () => {
   }, [page]);
   
   const handleAddToFavorites = (charId) => {
-    console.log(charId)
+    
     actions.addToFavorites(charId);
   };
 

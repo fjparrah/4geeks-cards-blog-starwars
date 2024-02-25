@@ -42,6 +42,7 @@ const SwapiCardPlanets = () => {
                 )}
                 <div className="card-body mb-3">
                   <h5 className="my-3 card-title">Nombre: {planet.name}</h5>
+                  <p className="card-text">Población: {planet.population}</p>
                   <p className="card-text">ID: {planet.id}</p>
 
                   <div>

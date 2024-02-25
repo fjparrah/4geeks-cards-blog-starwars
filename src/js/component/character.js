@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Context } from "../store/appContext";
+import { useContext } from "react";
 
 const SwapiCardCharacter = () => {
+  
   const index = useParams();
   const [character, setCharacter] = useState(null);
   const char = parseInt(index.id);
+  const { actions } = useContext(Context);
 
   useEffect(() => {
     const fetchCharacter = async () => {
@@ -19,6 +23,12 @@ const SwapiCardCharacter = () => {
 
     fetchCharacter();
   }, []);
+  
+  const handleAddToFavorites = (charId) => {
+    console.log(charId)
+    actions.addToFavorites(charId);
+  };
+
 
   const getCharacterImage = (x) => {
     let characterId = x;
@@ -47,9 +57,12 @@ const SwapiCardCharacter = () => {
                 <p className="card-text">Género: {character.gender}</p>
                 <p className="card-text">ID: {index.id}</p>
                 <div>
-                  <a href="/character" className="btn btn-success mt-5">
+                <button
+                    className="btn btn-success mt-5 ms-3"
+                    onClick={() => handleAddToFavorites({character})}
+                  >
                     Favorito
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>

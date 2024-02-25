@@ -36,7 +36,7 @@ export const Demo = () => {
                   <p className="card-text">Género: {character.gender}</p>
                   <div className="d-flex">
                     <Link
-                      to={`/character/${character.index}`}
+                      to={`/character/${character.index + 1}`}
                       className="btn btn-success me-3"
                     >
                       Detalles
@@ -55,11 +55,7 @@ export const Demo = () => {
         </ul>
       )}
       <br />
-      <Link to="/">
-        <button className="btn btn-primary">
-          Volver a la página principal
-        </button>
-      </Link>
+      
     </div>
 
     <div className="text-center container">
