@@ -6,8 +6,11 @@ import { Context } from "../store/appContext";
 const SwapiCardCharacter = () => {
   const { id } = useParams();
   const [character, setCharacter] = useState(null);
-  const charId = parseInt(id);
+  let charId = parseInt(id);
   const { actions } = useContext(Context);
+
+  // Check if charId is greater than 16, then add 1
+ 
 
   useEffect(() => {
     const fetchCharacter = async () => {
@@ -15,10 +18,10 @@ const SwapiCardCharacter = () => {
         const response = await fetch(`https://swapi.dev/api/people/${charId}`);
         const data = await response.json();
         const charData = {
-          ...data, index: charId - 1 ,
+          ...data,
+          index: charId - 1,
         };
         setCharacter(charData);
-        
       } catch (error) {
         console.error("Error fetching character:", error);
       }
@@ -29,17 +32,20 @@ const SwapiCardCharacter = () => {
 
   const handleAddToFavorites = () => {
     if (character) {
-      actions.addToFavorites({character});
+      actions.addToFavorites({ character });
     }
   };
 
   const getCharacterImage = () => {
-    if (charId > 16) {
-      return `https://starwars-visualguide.com/assets/img/characters/${charId}.jpg`;
-    }
     return `https://starwars-visualguide.com/assets/img/characters/${charId}.jpg`;
   };
+  
+  let charId2 = charId;
 
+  if (charId > 16) {
+    charId += 1;
+    charId2 -= 1; 
+  }
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -55,7 +61,7 @@ const SwapiCardCharacter = () => {
                 <h5 className="my-3 card-title">Nombre: {character.name}</h5>
                 <p className="card-text">Altura: {character.height}</p>
                 <p className="card-text">Género: {character.gender}</p>
-                <p className="card-text">ID: {charId}</p>
+                <p className="card-text">ID: {charId2}</p>
                 <div>
                   <button
                     className="btn btn-success mt-5 ms-3"
@@ -74,5 +80,6 @@ const SwapiCardCharacter = () => {
 };
 
 export default SwapiCardCharacter;
+
 
 
