@@ -98,6 +98,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (!characterExists) {
             setStore({ personajesFavoritos: [...personajesFavoritos, data.character] });
             window.alert("El personaje se agrego a favoritos");
+            
           } else {
             window.alert("El personaje ya está en favoritos");
           }

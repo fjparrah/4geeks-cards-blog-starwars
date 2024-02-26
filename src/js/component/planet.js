@@ -17,8 +17,7 @@ const SwapiCardPlanet = () => {
         
         // Ensure the data object has an 'id' property
         const planetData = {
-          ...data,
-          id: planetId,
+          ...data, id: planetId,
         };
 
         setPlanet(planetData);
