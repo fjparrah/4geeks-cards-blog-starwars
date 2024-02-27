@@ -9,7 +9,7 @@ const SwapiCardCharacter = () => {
   let charId = parseInt(id);
   const { actions } = useContext(Context);
 
-  // Check if charId is greater than 16, then add 1
+
  
 
   useEffect(() => {

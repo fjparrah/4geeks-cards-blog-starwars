@@ -15,7 +15,7 @@ const SwapiCardPlanet = () => {
         const response = await fetch(`https://swapi.dev/api/planets/${planetId}`);
         const data = await response.json();
         
-        // Ensure the data object has an 'id' property
+        
         const planetData = {
           ...data, id: planetId,
         };
